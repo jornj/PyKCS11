@@ -15,3 +15,4 @@ src/LowLevel.py
 src/pykcs11_wrap.cpp
 virtualenv
 .vscode/
+PyKCS11.egg-info/
