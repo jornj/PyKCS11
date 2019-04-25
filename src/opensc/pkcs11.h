@@ -1003,6 +1003,7 @@ _CK_DECLARE_FUNCTION (C_UnwrapKey,
 		       struct ck_attribute *templ,
 		       unsigned long attribute_count,
 		       ck_object_handle_t *key));
+
 _CK_DECLARE_FUNCTION (C_DeriveKey,
 		      (ck_session_handle_t session,
 		       struct ck_mechanism *mechanism,

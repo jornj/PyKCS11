@@ -237,6 +237,13 @@ public:
 		CK_SESSION_HANDLE hSession,
 		vector<unsigned char> inSignature);
 
+	CK_RV C_DeriveKey(
+		CK_SESSION_HANDLE hSession,
+		CK_MECHANISM* pMechanism,
+		CK_OBJECT_HANDLE hKey,
+		vector<CK_ATTRIBUTE_SMART> Template,
+		CK_OBJECT_HANDLE& outhKey);
+
 	CK_RV C_GenerateKey(
 		CK_SESSION_HANDLE hSession,
 		CK_MECHANISM* pMechanism,

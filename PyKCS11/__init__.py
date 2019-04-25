@@ -1160,6 +1160,29 @@ class Session(object):
             raise PyKCS11Error(rv)
         return decrypted
 
+    def derive(self, key, mecha, template, derived_key):
+        """
+        C_DeriveKey
+
+        :param key: a handle of the key to derive from
+        :type key: integer
+        :param mecha: the encrypt mechanism to be used
+          (use `MechanismRSAPKCS1` for `CKM_RSA_PKCS`)
+        :type mecha: :class:`Mechanism`
+        :param template: object template as list of (key, value)
+        :param derived_key: Derived key handle
+        :type derived_key: integer
+        :raises PyKCS11.PyKCS11Error: Raised when C_DeriveKey returns != CKR_OK
+        :return: Derived key handle
+        :rtype: integer
+        """
+        attrs = self._template2ckattrlist(template)
+        m = mecha.to_native()
+        rv = self.lib.C_DeriveKey(self.session, m, key, attrs, derived_key)
+        if rv != PyKCS11.CKR_OK:
+            raise PyKCS11.PyKCS11Error(rv)
+        return derived_key
+
     def wrapKey(self, wrappingKey, key, mecha=MechanismRSAPKCS1):
         """
         C_WrapKey

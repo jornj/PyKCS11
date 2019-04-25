@@ -802,6 +802,23 @@ CK_RV CPKCS11Lib::C_VerifyFinal(
 	return rv;
 }
 
+CK_RV CPKCS11Lib::C_DeriveKey(
+		CK_SESSION_HANDLE hSession,
+		CK_MECHANISM* pMechanism,
+		CK_OBJECT_HANDLE base_key,
+		vector<CK_ATTRIBUTE_SMART> Template,
+		CK_OBJECT_HANDLE& outhKey)
+{
+	CPKCS11LIB_PROLOGUE(C_DeriveKey);
+	CK_ULONG ulCount = 0;
+	CK_ATTRIBUTE * pTemplate = AttrVector2Template(Template, ulCount);
+	rv = m_pFunc->C_DeriveKey(hSession, pMechanism, base_key, pTemplate, ulCount, &outhKey);
+	if (pTemplate)
+		DestroyTemplate(pTemplate, ulCount);
+	CPKCS11LIB_EPILOGUE;
+	return rv;
+}
+
 CK_RV CPKCS11Lib::C_GenerateKey(
 	CK_SESSION_HANDLE hSession,
 	CK_MECHANISM* pMechanism,

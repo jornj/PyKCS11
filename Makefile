@@ -8,7 +8,7 @@ COVERAGE ?= coverage
 
 build: build-stamp
 
-build-stamp:
+build-stamp: src/pykcs11.i
 	$(PYTHON) setup.py build
 	touch build-stamp
 
@@ -27,7 +27,7 @@ clean distclean:
 
 rebuild: clean build
 
-src/pykcs11.i: src/opensc/pkcs11.h src/pkcs11lib.h src/pykcs11string.h src/ck_attribute_smart.h
+src/pykcs11.i: src/opensc/pkcs11.h src/pkcs11lib.h src/pkcs11lib.cpp src/pykcs11string.h src/ck_attribute_smart.h
 	touch $@
 
 dist: clean
